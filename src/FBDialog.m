@@ -498,14 +498,18 @@ params   = _params;
     [self updateWebOrientation];
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
     // 102 == WebKitErrorFrameLoadInterruptedByPolicyChange
+    
+    // NSURLErrorCancelled -999 == see ShareKit issue #56
     // -999 == "Operation could not be completed", note -999 occurs when the user clicks away before
     // the page has completely loaded, if we find cases where we want this to result in dialog failure
     // (usually this just means quick-user), then we should add something more robust here to account
     // for differences in application needs
-    if (!(([error.domain isEqualToString:@"NSURLErrorDomain"] && error.code == -999) ||
-          ([error.domain isEqualToString:@"WebKitErrorDomain"] && error.code == 102))) {
+    if (!(([error.domain isEqualToString:@"NSURLErrorDomain"] && error.code == NSURLErrorCancelled) ||
+          ([error.domain isEqualToString:@"WebKitErrorDomain"] && error.code == 102)))
+    {
         [self dismissWithError:error animated:YES];
     }
 }
