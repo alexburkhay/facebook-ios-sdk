@@ -11,9 +11,6 @@ sample/Hackbook/Hackbook.xcodeproj/*.pbxuser
 sample/Hackbook/Hackbook.xcodeproj/*.mode*
 sample/Hackbook/Hackbook.xcodeproj/xcuserdata*
 sample/Hackbook/Hackbook.xcodeproj/project.xcworkspace
-src/facebook-ios-sdk.xcodeproj/*.pbxuser
-src/facebook-ios-sdk.xcodeproj/*.mode*
-src/build/
 build/
 lib/
 test/UnitTest/UnitTest.xcodeproj/*.pbxuser
@@ -24,3 +21,12 @@ test/UnitTest/build/
 .DS_Store
 project.xcworkspace
 xcuserdata
+
+#project user schemes etc.
+src/build/
+src/*.xcodeproj/**
+!src/*.xcodeproj/*.pbxproj
+!src/*.xcodeproj/xcshareddata
+
+*.xcworkspace/**
+!src/*.xcworkspace/*.xcworkspacedata
